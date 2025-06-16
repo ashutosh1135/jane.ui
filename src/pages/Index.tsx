@@ -1,11 +1,16 @@
 
-import ChatApp from "@/components/ChatApp";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
+import { ChatInterface } from "@/components/ChatInterface";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <ChatApp />
-    </div>
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full">
+        <AppSidebar />
+        <ChatInterface />
+      </div>
+    </SidebarProvider>
   );
 };
 
