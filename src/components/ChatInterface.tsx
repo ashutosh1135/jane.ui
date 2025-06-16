@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -35,6 +35,14 @@ export function ChatInterface() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [messageType, setMessageType] = useState<'public' | 'private'>('public');
 
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
   const sendMessage = () => {
     if (!inputMessage.trim()) return;
 
@@ -67,13 +75,18 @@ export function ChatInterface() {
   };
 
   return (
-    <SidebarInset className="flex flex-col">
+    <SidebarInset className="flex flex-col glass-effect">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b bg-background">
+      <div className="flex items-center justify-between p-4 border-b border-white/20 dark:border-white/10 gradient-border backdrop-blur-md">
         <div className="flex items-center gap-2">
-          <SidebarTrigger />
-          <h1 className="text-xl font-semibold">Chat Application</h1>
-          <Badge variant={messageType === 'public' ? 'default' : 'secondary'} className="ml-2">
+          <SidebarTrigger className="hover:bg-white/20 dark:hover:bg-white/10 transition-colors" />
+          <h1 className="text-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Chat Application
+          </h1>
+          <Badge 
+            variant={messageType === 'public' ? 'default' : 'secondary'} 
+            className="ml-2 gradient-border"
+          >
             {messageType === 'public' ? (
               <>
                 <Globe className="w-3 h-3 mr-1" />
@@ -90,23 +103,23 @@ export function ChatInterface() {
         
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" className="gradient-border hover:bg-white/20 dark:hover:bg-white/10 transition-all">
               <Settings className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
+          <DropdownMenuContent align="end" className="w-48 glass-effect border-white/20">
             <DropdownMenuLabel>Settings</DropdownMenuLabel>
             <DropdownMenuSeparator />
             
             <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
               Theme
             </DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => setTheme('light')}>
+            <DropdownMenuItem onClick={() => setTheme('light')} className="hover:bg-white/10">
               <Sun className="w-4 h-4 mr-2" />
               Light
               {theme === 'light' && <span className="ml-auto">✓</span>}
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('dark')}>
+            <DropdownMenuItem onClick={() => setTheme('dark')} className="hover:bg-white/10">
               <Moon className="w-4 h-4 mr-2" />
               Dark
               {theme === 'dark' && <span className="ml-auto">✓</span>}
@@ -117,12 +130,12 @@ export function ChatInterface() {
             <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
               Message Type
             </DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => setMessageType('public')}>
+            <DropdownMenuItem onClick={() => setMessageType('public')} className="hover:bg-white/10">
               <Globe className="w-4 h-4 mr-2" />
               Public
               {messageType === 'public' && <span className="ml-auto">✓</span>}
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setMessageType('private')}>
+            <DropdownMenuItem onClick={() => setMessageType('private')} className="hover:bg-white/10">
               <Lock className="w-4 h-4 mr-2" />
               Private
               {messageType === 'private' && <span className="ml-auto">✓</span>}
@@ -143,22 +156,22 @@ export function ChatInterface() {
             >
               <div className={`p-2 rounded-full ${
                 message.sender === 'user' 
-                  ? 'bg-primary text-primary-foreground' 
-                  : 'bg-secondary text-secondary-foreground'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-600' 
+                  : 'bg-gradient-to-r from-gray-500 to-gray-600'
               }`}>
                 {message.sender === 'user' ? (
-                  <User className="w-4 h-4" />
+                  <User className="w-4 h-4 text-white" />
                 ) : (
-                  <Bot className="w-4 h-4" />
+                  <Bot className="w-4 h-4 text-white" />
                 )}
               </div>
-              <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+              <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl gradient-border backdrop-blur-sm ${
                 message.sender === 'user'
-                  ? 'bg-primary text-primary-foreground ml-auto'
-                  : 'bg-muted text-muted-foreground'
+                  ? 'ml-auto bg-gradient-to-r from-blue-500/20 to-purple-500/20'
+                  : 'bg-white/10 dark:bg-white/5'
               }`}>
-                <p className="text-sm">{message.text}</p>
-                <span className="text-xs opacity-70">
+                <p className="text-sm text-foreground">{message.text}</p>
+                <span className="text-xs opacity-70 text-muted-foreground">
                   {message.timestamp.toLocaleTimeString()}
                 </span>
               </div>
@@ -168,19 +181,20 @@ export function ChatInterface() {
       </ScrollArea>
 
       {/* Input Area */}
-      <div className="p-4 border-t bg-background">
+      <div className="p-4 border-t border-white/20 dark:border-white/10 gradient-border backdrop-blur-md">
         <div className="flex gap-2 max-w-4xl mx-auto">
           <Input
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder={`Type your ${messageType} message...`}
-            className="flex-1"
+            className="flex-1 gradient-border bg-white/10 dark:bg-white/5 placeholder:text-muted-foreground/60 focus:bg-white/20 dark:focus:bg-white/10 transition-all"
           />
           <Button 
             onClick={sendMessage} 
             disabled={!inputMessage.trim()}
             size="icon"
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all"
           >
             <Send className="w-4 h-4" />
           </Button>

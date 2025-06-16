@@ -12,7 +12,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Plus, User } from "lucide-react";
+import { Plus, User } from "lucide-react";
 
 const chatHistory = [
   { id: 1, title: "AI Assistant Help", lastMessage: "How can I help you today?", time: "2 min ago" },
@@ -23,9 +23,9 @@ const chatHistory = [
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="glass-effect border-r-0">
       <SidebarHeader className="p-4">
-        <Button className="w-full justify-start gap-2">
+        <Button className="w-full justify-start gap-2 gradient-border hover:bg-white/20 transition-all duration-200">
           <Plus className="w-4 h-4" />
           New Chat
         </Button>
@@ -33,20 +33,19 @@ export function AppSidebar() {
       
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Recent Chats</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-foreground/70 font-medium">Recent Chats</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {chatHistory.map((chat) => (
                 <SidebarMenuItem key={chat.id}>
-                  <SidebarMenuButton className="flex flex-col items-start gap-1 h-auto py-2">
+                  <SidebarMenuButton className="flex flex-col items-start gap-1 h-auto py-3 px-3 hover:bg-white/10 dark:hover:bg-white/5 rounded-lg transition-all duration-200">
                     <div className="flex items-center gap-2 w-full">
-                      <MessageSquare className="w-4 h-4 shrink-0" />
-                      <span className="font-medium truncate">{chat.title}</span>
+                      <span className="font-medium truncate text-foreground">{chat.title}</span>
                     </div>
-                    <div className="text-xs text-muted-foreground ml-6">
+                    <div className="text-xs text-muted-foreground ml-0 truncate w-full">
                       {chat.lastMessage}
                     </div>
-                    <div className="text-xs text-muted-foreground ml-6">
+                    <div className="text-xs text-muted-foreground/60 ml-0">
                       {chat.time}
                     </div>
                   </SidebarMenuButton>
@@ -58,12 +57,12 @@ export function AppSidebar() {
       </SidebarContent>
       
       <SidebarFooter className="p-4">
-        <div className="flex items-center gap-3 p-2 rounded-lg bg-muted">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-            <User className="w-4 h-4 text-primary-foreground" />
+        <div className="flex items-center gap-3 p-3 rounded-lg gradient-border">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+            <User className="w-4 h-4 text-white" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium">user@example.com</p>
+            <p className="text-sm font-medium text-foreground">user@example.com</p>
             <p className="text-xs text-muted-foreground">Online</p>
           </div>
         </div>
