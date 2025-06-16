@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -77,15 +76,15 @@ export function ChatInterface() {
   return (
     <SidebarInset className="flex flex-col glass-effect">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-white/20 dark:border-white/10 gradient-border backdrop-blur-md">
+      <div className="flex items-center justify-between p-4 border-b border-stone-200/50 dark:border-gray-800/50 gradient-border backdrop-blur-md">
         <div className="flex items-center gap-2">
-          <SidebarTrigger className="hover:bg-white/20 dark:hover:bg-white/10 transition-colors" />
-          <h1 className="text-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <SidebarTrigger className="hover:bg-stone-100/60 dark:hover:bg-gray-800/60 transition-colors" />
+          <h1 className="text-xl font-semibold bg-gradient-to-r from-amber-800 to-orange-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
             Chat Application
           </h1>
           <Badge 
             variant={messageType === 'public' ? 'default' : 'secondary'} 
-            className="ml-2 gradient-border"
+            className="ml-2 gradient-border bg-stone-100/50 dark:bg-gray-800/50"
           >
             {messageType === 'public' ? (
               <>
@@ -103,11 +102,11 @@ export function ChatInterface() {
         
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" className="gradient-border hover:bg-white/20 dark:hover:bg-white/10 transition-all">
+            <Button variant="outline" size="icon" className="gradient-border hover:bg-stone-100/60 dark:hover:bg-gray-800/60 transition-all">
               <Settings className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48 glass-effect border-white/20">
+          <DropdownMenuContent align="end" className="w-48 glass-effect border-stone-200/50 dark:border-gray-700/50">
             <DropdownMenuLabel>Settings</DropdownMenuLabel>
             <DropdownMenuSeparator />
             
@@ -156,8 +155,8 @@ export function ChatInterface() {
             >
               <div className={`p-2 rounded-full ${
                 message.sender === 'user' 
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600' 
-                  : 'bg-gradient-to-r from-gray-500 to-gray-600'
+                  ? 'bg-gradient-to-r from-amber-600 to-orange-600 dark:from-gray-600 dark:to-gray-700' 
+                  : 'bg-gradient-to-r from-stone-600 to-amber-700 dark:from-black dark:to-gray-800'
               }`}>
                 {message.sender === 'user' ? (
                   <User className="w-4 h-4 text-white" />
@@ -167,8 +166,8 @@ export function ChatInterface() {
               </div>
               <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl gradient-border backdrop-blur-sm ${
                 message.sender === 'user'
-                  ? 'ml-auto bg-gradient-to-r from-blue-500/20 to-purple-500/20'
-                  : 'bg-white/10 dark:bg-white/5'
+                  ? 'ml-auto bg-gradient-to-r from-amber-100/60 to-orange-100/40 dark:from-gray-800/80 dark:to-gray-900/60'
+                  : 'bg-stone-50/60 dark:bg-black/60'
               }`}>
                 <p className="text-sm text-foreground">{message.text}</p>
                 <span className="text-xs opacity-70 text-muted-foreground">
@@ -181,20 +180,20 @@ export function ChatInterface() {
       </ScrollArea>
 
       {/* Input Area */}
-      <div className="p-4 border-t border-white/20 dark:border-white/10 gradient-border backdrop-blur-md">
+      <div className="p-4 border-t border-stone-200/50 dark:border-gray-800/50 gradient-border backdrop-blur-md">
         <div className="flex gap-2 max-w-4xl mx-auto">
           <Input
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder={`Type your ${messageType} message...`}
-            className="flex-1 gradient-border bg-white/10 dark:bg-white/5 placeholder:text-muted-foreground/60 focus:bg-white/20 dark:focus:bg-white/10 transition-all"
+            className="flex-1 gradient-border bg-stone-50/40 dark:bg-black/40 placeholder:text-muted-foreground/60 focus:bg-stone-100/60 dark:focus:bg-gray-900/60 transition-all"
           />
           <Button 
             onClick={sendMessage} 
             disabled={!inputMessage.trim()}
             size="icon"
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all"
+            className="bg-gradient-to-r from-amber-600 to-orange-600 dark:from-gray-700 dark:to-gray-800 hover:from-amber-700 hover:to-orange-700 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all"
           >
             <Send className="w-4 h-4" />
           </Button>
