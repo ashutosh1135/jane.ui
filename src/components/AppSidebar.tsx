@@ -46,11 +46,6 @@ export function AppSidebar() {
                 <SidebarMenuItem key={chat.id}>
                   <SidebarMenuButton 
                     className="flex flex-col items-start gap-1 h-auto py-3 px-3 rounded-lg transition-all duration-200 border-0 hover:opacity-80"
-                    style={{ 
-                      ':hover': { 
-                        background: 'linear-gradient(135deg, rgba(201, 251, 188, 0.2) 0%, rgba(190, 240, 175, 0.15) 100%)' 
-                      } 
-                    }}
                   >
                     <div className="flex items-center gap-2 w-full">
                       <span className="font-medium truncate text-stone-800 dark:text-gray-100">{chat.title}</span>
