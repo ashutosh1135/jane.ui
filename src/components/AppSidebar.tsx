@@ -25,7 +25,7 @@ export function AppSidebar() {
   return (
     <Sidebar className="glass-effect border-r-0">
       <SidebarHeader className="p-4">
-        <Button className="w-full justify-start gap-2 gradient-border hover:bg-white/20 transition-all duration-200">
+        <Button className="w-full justify-start gap-2 gradient-border hover:bg-slate-100/30 dark:hover:bg-white/10 transition-all duration-200 bg-gradient-to-r from-slate-100/60 to-indigo-100/40 dark:from-gray-800/60 dark:to-gray-900/40">
           <Plus className="w-4 h-4" />
           New Chat
         </Button>
@@ -38,7 +38,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {chatHistory.map((chat) => (
                 <SidebarMenuItem key={chat.id}>
-                  <SidebarMenuButton className="flex flex-col items-start gap-1 h-auto py-3 px-3 hover:bg-white/10 dark:hover:bg-white/5 rounded-lg transition-all duration-200">
+                  <SidebarMenuButton className="flex flex-col items-start gap-1 h-auto py-3 px-3 hover:bg-slate-100/20 dark:hover:bg-white/5 rounded-lg transition-all duration-200">
                     <div className="flex items-center gap-2 w-full">
                       <span className="font-medium truncate text-foreground">{chat.title}</span>
                     </div>
@@ -58,7 +58,7 @@ export function AppSidebar() {
       
       <SidebarFooter className="p-4">
         <div className="flex items-center gap-3 p-3 rounded-lg gradient-border">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-blue-600 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
             <User className="w-4 h-4 text-white" />
           </div>
           <div className="flex-1 min-w-0">
